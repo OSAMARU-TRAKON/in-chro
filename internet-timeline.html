@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTERNET CHRONICLE 1993–2026</title>
+<meta name="description" content="インターネットの30年を振り返る年表。サービス・ハードウェア・インフラ・日本の動きを紹介。歴史を知れば、未来が見える。">
+<meta property="og:title" content="INTERNET CHRONICLE 1993–2026">
+<meta property="og:description" content="たった30年遡れば、次の10年が見えてくる。インターネット史年表。">
+<meta property="og:type" content="website">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;700&family=Bebas+Neue&display=swap');
+
+  :root {
+    --bg:#0a0c10; --bg2:#0f1218; --line:#1e2435;
+    --accent-service:#00c8ff; --accent-hardware:#ff6b35;
+    --accent-infra:#7fff5a; --accent-japan:#ff3fa4;
+    --text:#c8d4e8; --text-dim:#4a5568; --text-bright:#edf2ff;
+    --glow-blue:0 0 12px rgba(0,200,255,0.5);
+    --glow-orange:0 0 12px rgba(255,107,53,0.5);
+    --glow-green:0 0 12px rgba(127,255,90,0.5);
+    --glow-pink:0 0 12px rgba(255,63,164,0.5);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+
+  /* ── INTRO ── */
+  .intro{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:64px 24px 48px;border-bottom:1px solid var(--line);}
+  .intro-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;color:var(--accent-service);text-transform:uppercase;margin-bottom:20px;}
+  .intro-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,8vw,5.5rem);line-height:0.95;color:var(--text-bright);letter-spacing:0.04em;margin-bottom:28px;}
+  .intro-title span{color:var(--accent-service);}
+  .intro-body{font-size:0.92rem;line-height:1.9;color:var(--text);max-width:640px;margin-bottom:32px;}
+  .intro-body strong{color:var(--text-bright);font-weight:700;}
+  .intro-stats{display:flex;gap:28px;flex-wrap:wrap;}
+  .intro-stat{font-family:'IBM Plex Mono',monospace;}
+  .intro-stat-num{font-size:1.8rem;color:var(--accent-service);font-weight:600;line-height:1;}
+  .intro-stat-label{font-size:0.6rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;}
+
+  /* ── HEADER ── */
+  header{position:sticky;top:0;z-index:100;background:rgba(10,12,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .header-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--text-bright);}
+  .header-title span{color:var(--accent-service);}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .legend-item{display:flex;align-items:center;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:0.62rem;cursor:pointer;padding:3px 8px;border-radius:3px;border:1px solid transparent;transition:all 0.2s;user-select:none;}
+  .legend-item:hover{opacity:0.85;}
+  .legend-item.active{border-color:currentColor;}
+  .legend-item.inactive{opacity:0.25;}
+  .legend-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  .li-service{color:var(--accent-service);} .li-service .legend-dot{background:var(--accent-service);}
+  .li-hardware{color:var(--accent-hardware);} .li-hardware .legend-dot{background:var(--accent-hardware);}
+  .li-infra{color:var(--accent-infra);} .li-infra .legend-dot{background:var(--accent-infra);}
+  .li-japan{color:var(--accent-japan);} .li-japan .legend-dot{background:var(--accent-japan);}
+  .search-box{display:flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:5px 10px;}
+  .search-box input{background:none;border:none;outline:none;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:0.72rem;width:130px;}
+  .search-box input::placeholder{color:var(--text-dim);}
+
+  /* ── TIMELINE ── */
+  .timeline-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
+  .stats-bar{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--text-dim);padding:6px 0 24px;text-align:right;}
+  .stats-bar span{color:var(--accent-service);}
+  .no-results{text-align:center;padding:60px 0;color:var(--text-dim);font-family:'IBM Plex Mono',monospace;font-size:0.8rem;display:none;}
+
+  .year-group{display:grid;grid-template-columns:88px 2px 1fr;position:relative;}
+
+  .year-label-col{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;padding-right:20px;padding-top:6px;}
+
+  /* era-label: 気づく人だけ気づくレベル */
+  .era-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.48rem;
+    color:#2a3a5a;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    margin-bottom:4px;
+    opacity:0.5;
+    line-height:1;
+    text-align:right;
+  }
+
+  .year-label{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--text-dim);line-height:1;transition:color 0.3s;letter-spacing:0.04em;text-align:right;}
+  .year-group.has-events .year-label{color:var(--text-bright);}
+
+  .spine-col{position:relative;display:flex;flex-direction:column;align-items:center;}
+  .spine-line{width:2px;background:var(--line);position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);}
+  .spine-dot{width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--line);position:relative;z-index:2;margin-top:14px;flex-shrink:0;transition:all 0.3s;}
+  .year-group.has-events .spine-dot{border-color:#2a3550;background:#141a28;}
+
+  .events-col{padding:4px 0 24px 20px;display:flex;flex-direction:column;gap:8px;}
+
+  /* ── EVENT CARD ── */
+  .event-card{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:12px 16px;cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;animation:fadeSlide 0.35s ease both;}
+  @keyframes fadeSlide{from{opacity:0;transform:translateX(-8px);}to{opacity:1;transform:translateX(0);}}
+  .event-card:hover{background:#131928;transform:translateX(4px);}
+  .event-card.cat-service{border-left-color:var(--accent-service);}
+  .event-card.cat-hardware{border-left-color:var(--accent-hardware);}
+  .event-card.cat-infra{border-left-color:var(--accent-infra);}
+  .event-card.cat-japan{border-left-color:var(--accent-japan);}
+  .event-card.cat-service:hover{box-shadow:var(--glow-blue);}
+  .event-card.cat-hardware:hover{box-shadow:var(--glow-orange);}
+  .event-card.cat-infra:hover{box-shadow:var(--glow-green);}
+  .event-card.cat-japan:hover{box-shadow:var(--glow-pink);}
+  .event-card.hidden{display:none;}
+
+  .defunct-badge{font-family:'IBM Plex Mono',monospace;font-size:0.52rem;padding:1px 5px;border-radius:2px;background:rgba(255,80,80,0.1);color:#e05050;border:1px solid rgba(255,80,80,0.25);text-transform:uppercase;letter-spacing:0.06em;margin-left:6px;flex-shrink:0;}
+  .status-badge{font-family:'IBM Plex Mono',monospace;font-size:0.5rem;padding:1px 5px;border-radius:2px;text-transform:uppercase;letter-spacing:0.08em;flex-shrink:0;}
+  .status-DOMINANT{background:rgba(110,231,183,0.1);color:#6ee7b7;border:1px solid rgba(110,231,183,0.25);}
+  .status-LEGACY{background:rgba(156,163,175,0.1);color:#9ca3af;border:1px solid rgba(156,163,175,0.2);}
+  .status-DEAD{background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.25);}
+
+  .event-header{display:flex;align-items:center;gap:7px;margin-bottom:6px;flex-wrap:wrap;}
+  .event-tag{font-family:'IBM Plex Mono',monospace;font-size:0.54rem;padding:1px 6px;border-radius:2px;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;flex-shrink:0;}
+  .cat-service .event-tag{background:rgba(0,200,255,0.08);color:var(--accent-service);}
+  .cat-hardware .event-tag{background:rgba(255,107,53,0.08);color:var(--accent-hardware);}
+  .cat-infra .event-tag{background:rgba(127,255,90,0.08);color:var(--accent-infra);}
+  .cat-japan .event-tag{background:rgba(255,63,164,0.08);color:var(--accent-japan);}
+
+  .event-name{font-weight:700;font-size:0.86rem;color:var(--text-bright);flex:1;line-height:1.3;}
+
+  /* desc: 断定・言い切り */
+  .event-desc{font-size:0.78rem;color:var(--text);line-height:1.7;margin-bottom:0;}
+
+  /* detail: 人間の体験・具体 */
+  .event-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
+  .event-detail p{font-size:0.74rem;color:#8a9ab8;line-height:1.8;}
+  .event-card.open .event-detail{display:block;}
+
+  .impact-bar{display:flex;align-items:center;gap:8px;margin-top:12px;}
+  .impact-label{font-family:'IBM Plex Mono',monospace;font-size:0.56rem;color:var(--text-dim);width:52px;letter-spacing:0.06em;}
+  .impact-track{flex:1;height:2px;background:var(--line);border-radius:2px;overflow:hidden;}
+  .impact-fill{height:100%;border-radius:2px;transition:width 0.6s ease;}
+  .cat-service .impact-fill{background:var(--accent-service);}
+  .cat-hardware .impact-fill{background:var(--accent-hardware);}
+  .cat-infra .impact-fill{background:var(--accent-infra);}
+  .cat-japan .impact-fill{background:var(--accent-japan);}
+
+  /* ── FOOTER ── */
+  footer{position:relative;z-index:1;border-top:1px solid var(--line);background:var(--bg2);padding:56px 24px 40px;}
+  .footer-inner{max-width:820px;margin:0 auto;}
+  .footer-heading{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.08em;color:var(--text-bright);margin-bottom:8px;}
+  .footer-sub{font-size:0.82rem;color:var(--text-dim);margin-bottom:32px;line-height:1.7;}
+  .contact-form{display:flex;flex-direction:column;gap:14px;max-width:560px;}
+  .form-row{display:flex;gap:12px;}
+  .form-group{display:flex;flex-direction:column;gap:5px;flex:1;}
+  .form-label{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;}
+  .form-input,.form-select,.form-textarea{background:var(--bg);border:1px solid var(--line);border-radius:3px;padding:9px 12px;color:var(--text);font-family:'Noto Sans JP',sans-serif;font-size:0.8rem;outline:none;transition:border-color 0.2s;width:100%;}
+  .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent-service);}
+  .form-select option{background:var(--bg);}
+  .form-textarea{resize:vertical;min-height:90px;line-height:1.6;}
+  .form-submit{display:inline-flex;align-items:center;gap:8px;background:var(--accent-service);color:#000;border:none;border-radius:3px;padding:10px 22px;font-family:'IBM Plex Mono',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s;align-self:flex-start;}
+  .form-submit:hover{opacity:0.85;}
+  .form-note{font-size:0.66rem;color:var(--text-dim);margin-top:2px;}
+  .form-success{display:none;padding:14px 16px;background:rgba(127,255,90,0.07);border:1px solid rgba(127,255,90,0.2);border-radius:3px;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--accent-infra);}
+  .footer-copy{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+  .footer-copy-text{font-family:'IBM Plex Mono',monospace;font-size:0.63rem;color:var(--text-dim);letter-spacing:0.06em;}
+  .footer-powered{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--text-dim);letter-spacing:0.08em;}
+  .footer-powered a{color:var(--accent-service);text-decoration:none;}
+
+  @media(max-width:600px){
+    .year-group{grid-template-columns:54px 2px 1fr;}
+    .year-label{font-size:1.3rem;}
+    .era-label{font-size:0.4rem;}
+    .events-col{padding-left:12px;}
+    .form-row{flex-direction:column;}
+    .intro-title{font-size:2.6rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-eyebrow">// A Chronicle of the Connected World</div>
+  <h1 class="intro-title">INTERNET<br><span>CHRONICLE</span><br>1993–2026</h1>
+  <div class="intro-body">
+    <p>歴史の教科書は、数百年・数千年のスパンで語られる。でも<strong>インターネットの世界は違う。</strong></p>
+    <br>
+    <p>たった<strong>30年</strong>遡るだけで、なぜ今この世界がこうなっているのかがわかる。<br>誰が覇権を握り、誰が消え、何が世界を変えたのか。</p>
+    <br>
+    <p>インターネットは、<strong>世界中の天才が作り、巨人が広げ、誰かが悪用し、社会が規制し、また新たな形で意味を与えてきた。</strong></p>
+    <br>
+    <p>そしてその流れを知る者だけが、<strong>次の10年を予測できる。</strong></p>
+  </div>
+  <div class="intro-stats">
+    <div class="intro-stat">
+      <div class="intro-stat-num" id="totalCount">—</div>
+      <div class="intro-stat-label">Total Events</div>
+    </div>
+    <div class="intro-stat">
+      <div class="intro-stat-num">33</div>
+      <div class="intro-stat-label">Years Covered</div>
+    </div>
+    <div class="intro-stat">
+      <div class="intro-stat-num">4</div>
+      <div class="intro-stat-label">Categories</div>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY HEADER -->
+<header>
+  <div class="header-title">INTERNET <span>CHRONICLE</span></div>
+  <div class="legend" id="legend">
+    <div class="legend-item li-service active" data-cat="service" onclick="toggleCat('service')"><div class="legend-dot"></div>SERVICE</div>
+    <div class="legend-item li-hardware active" data-cat="hardware" onclick="toggleCat('hardware')"><div class="legend-dot"></div>HARDWARE</div>
+    <div class="legend-item li-infra active" data-cat="infra" onclick="toggleCat('infra')"><div class="legend-dot"></div>INFRA / TECH</div>
+    <div class="legend-item li-japan active" data-cat="japan" onclick="toggleCat('japan')"><div class="legend-dot"></div>JAPAN</div>
+  </div>
+  <div class="search-box">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4a5568" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="キーワード検索..." oninput="doSearch()">
+  </div>
+</header>
+
+<!-- TIMELINE -->
+<div class="timeline-wrap" id="timelineWrap">
+  <div class="stats-bar" id="statsBar">SHOWING <span id="countDisplay">0</span> EVENTS</div>
+  <div id="noResults" class="no-results">該当するイベントが見つかりません</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-heading">ADD TO THE CHRONICLE</div>
+    <div class="footer-sub">訂正・追加したいサービスや出来事があれば教えてください。<br>あなたの記憶が、この年表をより正確で豊かなものにします。</div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">種別</label>
+          <select class="form-select" name="type">
+            <option value="add">追加リクエスト</option>
+            <option value="fix">訂正・修正</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">年（西暦）</label>
+          <input class="form-input" type="text" name="year" placeholder="例: 2004">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">サービス名・出来事</label>
+        <input class="form-input" type="text" name="event" placeholder="例: Googleマップ登場">
+      </div>
+      <div class="form-group">
+        <label class="form-label">詳細・補足</label>
+        <textarea class="form-textarea" name="detail" placeholder="どんな影響があったか、なぜ重要だと思うかなど、自由に記載してください。"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">メールアドレス（任意）</label>
+        <input class="form-input" type="email" name="email" placeholder="返信が必要な場合のみ">
+      </div>
+      <button type="submit" class="form-submit">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+        SEND
+      </button>
+      <div class="form-success" id="formSuccess">✓ 送信ありがとうございます。内容を確認のうえ、年表に反映します。</div>
+      <div class="form-note">※ このフォームの内容は年表の改善のみに使用されます。</div>
+    </form>
+    <div class="footer-copy">
+      <div class="footer-copy-text">©INTERNET CHRONICLE 2026</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const ERA_MAP = {
+  FOUNDATION:    '1993–1999',
+  WEB_EXPANSION: '2000–2006',
+  PLATFORM:      '2007–2015',
+  AI_ERA:        '2016–'
+};
+
+const DATA = [
+
+/* ── FOUNDATION（1993–1999） ── */
+
+{year:1993,era:'FOUNDATION',cat:'infra',name:'Mosaic — Webが視覚化される',desc:'インターネットが文字中心から視覚的に理解できるものへ変わった。',detail:'イリノイ大学のマーク・アンドリーセンら学生チームが開発。リリース1年で200万人が利用し、後にNetscapeを創業。「インターネットを見た最初の体験」として多くの人の記憶に残る。',impact:85},
+{year:1994,era:'FOUNDATION',cat:'service',name:'Yahoo! — 情報の入口が生まれる',desc:'インターネットに「入口」という概念が成立した。',detail:'スタンフォードの学生ジェリー・ヤンとデビッド・ファイロが「ジェリーとデビッドのWWWガイド」として開始。最初の1年で月間100万PVを達成。検索エンジンではなく人間が分類するディレクトリという設計が時代を反映していた。',impact:88},
+{year:1994,era:'FOUNDATION',cat:'service',name:'Amazon — 商取引がオンライン化',desc:'商品を店舗に行かずに購入できる構造が成立した。',detail:'ジェフ・ベゾスがガレージで創業。最初の商品は書籍で、初年度売上は51万ドル。「なぜ書籍か？」と問われ「300万タイトルもある商品カテゴリは書籍しかない」と答えた。現在の時価総額は2兆ドルを超える。',impact:95},
+{year:1994,era:'FOUNDATION',cat:'infra',name:'Netscape — 商用Webの幕開け',desc:'ブラウザが商用化され、インターネットがビジネスの場になった。',detail:'マーク・アンドリーセンがMosaicチームを率いてNetscape Communications設立。SSL（暗号化通信）を実装し、クレジットカード情報を安全に送れる仕組みを作った。1995年のIPOは当時最大のネット株上場として話題を呼んだ。',impact:88},
+{year:1995,era:'FOUNDATION',cat:'infra',name:'Windows95 — ネットが家庭に入る',desc:'一般家庭がインターネットに接続できる環境が整った。',detail:'ローリング・ストーンズの「Start Me Up」を使ったCMが世界中で流れ、日本では深夜販売に数千人が並んだ。TCP/IPをOSに標準搭載したことで「PCを買えばネットに繋がる」時代が始まった。発売後4日で100万本が売れた。',impact:98},
+{year:1995,era:'FOUNDATION',cat:'japan',name:'テレホーダイ — 夜のネット文化が生まれる',desc:'日本でインターネット利用が日常化し、時間帯に応じた行動習慣が生まれた。',detail:'NTTが提供した夜11時〜翌8時の定額ダイヤルアップサービス。全国で「テレホタイム」と呼ばれる夜11時の一斉接続が発生し、2ちゃんねるやオンラインゲームへのアクセスが集中。プロバイダーのサーバーが毎夜落ちるほどだった。',impact:82},
+{year:1995,era:'FOUNDATION',cat:'japan',name:'Yahoo! JAPAN — 日本のポータルが確立',desc:'日本語のインターネット入口が成立し、国内の情報流通が加速した。',detail:'孫正義がジェリー・ヤンに直談判し、ソフトバンクとの合弁で設立。日本語対応と使いやすさで圧倒的なシェアを獲得し、長くトップページが「日本のインターネットの玄関」として機能した。',impact:90},
+{year:1996,era:'FOUNDATION',cat:'service',name:'ICQ — リアルタイム通信の誕生',desc:'インターネット上で即時に会話する文化が生まれた。',detail:'イスラエルのMirabilisが開発。「I Seek You」を略した名前で、「uh-oh♪」という通知音とともに相手のオンライン状態が見える体験は衝撃的だった。ユーザー番号（UIN）が小さいほど古参という文化も生まれた。1997年にAOLが2.87億ドルで買収。',impact:80},
+{year:1997,era:'FOUNDATION',cat:'service',name:'Netflix（DVD） — 定額流通の原型',desc:'コンテンツを月額で借り放題にするモデルが生まれた。',detail:'リード・ヘイスティングスが「アポロ13」のレンタル延滞料40ドルに腹を立てたことが創業のきっかけ（本人談）。ブロックバスターに買収を提案したが「笑いものにされた」と回顧している。この屈辱が後の配信革命を生んだ。',impact:80},
+{year:1998,era:'FOUNDATION',cat:'service',name:'Google — 検索の質が変わる',desc:'検索が「探す」から「答えを得る」行為へ変わった。',detail:'ラリー・ペイジとセルゲイ・ブリンがスタンフォードの博士課程で開発。「BackRub」という名前から改名し、スタンフォードのサーバールームで創業。最初の外部投資家はサン・マイクロシステムズ共同創業者のアンディ・ベクトルシャイムで、10万ドルの小切手を会社設立前に書いてもらった。',impact:100},
+{year:1998,era:'FOUNDATION',cat:'japan',name:'楽天 — モール型ECの成立',desc:'ECが単一店舗ではなく商店街型の構造として発展した。',detail:'三木谷浩史が当初6名・13店舗でスタート。「楽天市場」という名前は「楽しい天国」から。Amazonの倉庫型とは対照的に出店者の個性を活かすモデルを採用し、独自のポイント経済圏を構築した。現在は100を超えるサービスを展開する。',impact:88},
+{year:1999,era:'FOUNDATION',cat:'service',name:'Napster — 音楽流通が崩れる',desc:'音楽流通の前提が崩壊し、デジタルコピー時代が始まった。',detail:'18歳の大学生ショーン・ファニングが寮の部屋で開発。最盛期に8000万人のユーザーを抱えたが、メタリカやドクター・ドレーが訴訟を起こし2001年に閉鎖。「違法」が証明した需要をiTunesが「合法」で回収するという構図を作った。',impact:82,status:'DEAD'},
+{year:1999,era:'FOUNDATION',cat:'infra',name:'Wi-Fi — 接続の場所制約が消える',desc:'インターネット接続がケーブルから解放された。',detail:'IEEE 802.11bとして規格化。「Wi-Fi」というブランド名はコンサルタント会社が命名した造語。スターバックスが2002年にWi-Fiを全店導入したことで「カフェでノートPCを広げる」文化が定着した。',impact:90},
+{year:1999,era:'FOUNDATION',cat:'infra',name:'Bluetooth — デバイス間の壁が消える',desc:'機器同士が線なしで繋がる環境が標準化された。',detail:'エリクソンのジャープ・ハールトセンが開発。名前はデンマーク王ハーラル・ブロタン（青歯王）から。スウェーデン・ノルウェー・フィンランドを統一した王にちなみ、デバイスを繋ぐ技術として命名された。現在は年間40億台以上のデバイスに搭載。',impact:80},
+{year:1999,era:'FOUNDATION',cat:'japan',name:'iモード — モバイルインターネット誕生',desc:'インターネットがPCから携帯へ広がり、日常に入り込んだ。',detail:'NTTドコモの松永真理・夏野剛らが開発。絵文字は栗田穣崇が172文字を一人で描いた。サービス開始から1年で契約者数が1000万人を突破し、世界の携帯メーカーが視察に来日した。後にiPhoneに市場を奪われたが、「モバイルコンテンツ課金」の先駆けとして歴史に刻まれた。',impact:95},
+{year:1999,era:'FOUNDATION',cat:'japan',name:'2ちゃんねる — 匿名文化の成立',desc:'個人ではなく群が発言主体となる文化が生まれた。',detail:'19歳の西村博之（ひろゆき）が1999年5月にアメリカのサーバーを借りて開設。実名制の海外SNSとは正反対の匿名文化が育ち、AA（アスキーアート）・コピペ文化・「〜なんじゃないの」口調など独自の言語体系が生まれた。ピーク時の月間PVは数十億。',impact:80},
+
+/* ── WEB_EXPANSION（2000–2006） ── */
+
+{year:2000,era:'WEB_EXPANSION',cat:'infra',name:'ITバブル崩壊 — 本質が選別される',desc:'インターネット事業の価値が現実に引き戻された。',detail:'2000年3月のNASDAQピーク（5048ポイント）から2002年10月には1114ポイントまで暴落。総額5兆ドルが消えた。ペット用品のPets.com、家具のLiving.comなど数百社が消滅。一方でAmazon・Google・eBayは生き残り、バブル後の土台を築いた。',impact:92},
+{year:2000,era:'WEB_EXPANSION',cat:'japan',name:'スタービーチ — ネットが現実に接続される',desc:'インターネットが現実の人間関係に直接影響を与え始めた。',detail:'「踊る大捜査線」などの人気映画がWinnyで流通した時期と重なり、出会い系サイトへの未成年アクセスや事件が多発。2003年に「出会い系サイト規制法」が制定されるきっかけとなった。スマートフォン時代のマッチングアプリ（Tinder・Pairs等）の「需要」を先取りした存在でもある。',impact:65,status:'DEAD'},
+{year:2001,era:'WEB_EXPANSION',cat:'hardware',name:'iPod — 音楽体験が再定義される',desc:'音楽を持ち歩く行為が、CDからデジタルデータへ変わった。',detail:'スティーブ・ジョブズが「1,000曲をポケットに」と発表。開発期間わずか10ヶ月でリリース。iTunesとの一体設計により「曲を買ってデバイスで聴く」エコシステムを確立した。AppleがPC企業から音楽企業へ変貌するきっかけとなり、後のiPhone帝国の起点となった。',impact:90},
+{year:2001,era:'WEB_EXPANSION',cat:'service',name:'Wikipedia — 知識の民主化',desc:'知識が専門家から一般ユーザーへ開放された。',detail:'ジミー・ウェールズとラリー・サンガーが設立。当初は専門家が執筆する「Nupedia」の補助サービスとして始まったが、一般参加型のWikipediaが爆発的に成長。現在は60言語以上・6000万記事以上。非営利の寄付モデルを貫き、広告を掲載しない姿勢を維持している。',impact:90},
+{year:2001,era:'WEB_EXPANSION',cat:'japan',name:'ADSL — 常時接続の時代へ',desc:'インターネットが従量課金から定額・高速へ切り替わった。',detail:'孫正義がヤフーBBを月額2,280円という破格の価格で展開。駅前でモデムを無料配布するゲリラ戦略でNTTに対抗した。1年で700万契約を獲得し、日本のブロードバンド普及率を世界トップ水準に押し上げた。テレホーダイの「深夜だけ」文化が終わった。',impact:88},
+{year:2002,era:'WEB_EXPANSION',cat:'japan',name:'Winny — P2Pと著作権の衝突',desc:'個人間のファイル共有が合法性を問われる時代になった。',detail:'東京大学助手の金子勇氏が開発。「NoMore映画泥棒」キャンペーン（2005年〜）のきっかけを作った存在でもある。2004年に著作権法違反幇助で逮捕され、一審有罪・二審逆転無罪・2011年最高裁で無罪確定。技術者が萎縮する「Winny事件」として日本のIT史に刻まれた。',impact:75,status:'DEAD'},
+{year:2003,era:'WEB_EXPANSION',cat:'service',name:'Skype — 通話コストがゼロになる',desc:'国際通話の距離と料金が同時に消えた。',detail:'エストニアのニコラス・センストロムとヤーヌス・フリースが開発。P2P技術を使いサーバーコストを最小化した。eBayが2005年に26億ドルで買収、MicrosoftがさらにeBayから2011年に85億ドルで買収。2020年のコロナ禍でZoomに主役を奪われた。',impact:85,status:'LEGACY'},
+{year:2003,era:'WEB_EXPANSION',cat:'service',name:'Second Life — 仮想世界経済の実験',desc:'現実とは別のデジタル空間に経済圏が生まれた。',detail:'フィリップ・ローズデールが設立したLinden Labが運営。土地（リンデンドル建て）の売買が成立し、IBM・ロイター・トヨタなどが仮想オフィスを開設。ピークの2007年には月間ユーザー100万人を超えたが、重いグラフィックと「何のためにいるのか」問題で縮小。現在もサービスは続いており、2021年のMetaバース失速の先例として語られる。',impact:65,status:'LEGACY'},
+{year:2003,era:'WEB_EXPANSION',cat:'service',name:'iTunes Store — 音楽の単曲販売が始まる',desc:'音楽の購入単位がアルバムから1曲へ変わった。',detail:'スティーブ・ジョブズがメジャー5社を説得し、1曲99セント均一でスタート。初日で100万曲を販売。「アルバムをまるごと買わなくていい」という自由がCDビジネスを解体した。Napsterが「違法」で証明した需要を「合法」で回収した歴史的転換点。',impact:88},
+{year:2003,era:'WEB_EXPANSION',cat:'japan',name:'ブログ — 個人がメディアになる',desc:'個人が情報発信の主体となった。',detail:'Six ApartのMovable Typeが普及し、はてなダイアリー・ライブドアブログが乱立するブログ戦国時代に。藤田晋の「渋谷で働く社長の告白」が経営者ブログブームを牽引した。2006年のライブドアショック（堀江貴文逮捕）でライブドアブログからユーザーが大量流出し、アメブロが芸能人御用達プラットフォームとして確立した。',impact:85},
+{year:2004,era:'WEB_EXPANSION',cat:'service',name:'Facebook — 実名SNSの成立',desc:'実名ベースの人間関係がデジタル上で可視化された。',detail:'マーク・ザッカーバーグがハーバード在学中の19歳で創業。「TheFacebook」として学内限定で開始し、1ヶ月でハーバード生の半数が登録。「次の大学」へ段階的に展開する戦略で全米に拡大した。2012年に10億ユーザー突破、同年Instagram（10億ドル）を買収。現在のMetaは月間30億人以上が利用する。',impact:95,status:'DOMINANT'},
+{year:2004,era:'WEB_EXPANSION',cat:'service',name:'Gmail — Webメールが実用化',desc:'メールの保存・検索・容量の常識が変わった。',detail:'Googleが4月1日にリリースしたため「エイプリルフールのジョーク」と思われた逸話が有名。当時のWebメールが数MBの容量制限だったのに対し1GBを無償提供。「メールを消さずに全部検索できる」という発想が革命的だった。広告のターゲティングにメール内容を活用するモデルも確立した。',impact:85,status:'DOMINANT'},
+{year:2004,era:'WEB_EXPANSION',cat:'japan',name:'mixi — 日本型SNSの成立',desc:'招待制のソーシャルネットワークが日本の人間関係をデジタル化した。',detail:'笠原健治が創業。招待制という設計が「信頼できる人だけが入れる」感覚を生み、日記・コミュニティ機能でピーク時2200万人が参加。しかしオープン化・スマホ対応の遅れとFacebook・Twitterの台頭で主役ではなくなったが、サービスは現在も継続している。',impact:85,status:'LEGACY'},
+{year:2004,era:'WEB_EXPANSION',cat:'japan',name:'GREE / モバゲー — ソーシャルゲームの誕生',desc:'携帯向けゲームが課金モデルとして成立した。',detail:'GREE（田中良和）は2004年、モバゲータウン（DeNA）は2006年に開始。「釣りスタ」「怪盗ロワイヤル」などのガチャ課金ゲームが社会問題化し、コンプガチャ規制（2012年）につながった。両社合計の売上ピークは年間3000億円超。スマホシフトに乗り遅れ縮小したが、サービス自体は継続している。',impact:80,status:'LEGACY'},
+{year:2005,era:'WEB_EXPANSION',cat:'service',name:'YouTube — 動画が個人に開放される',desc:'映像メディアの主導権が個人へ移った。',detail:'チャド・ハーリー・スティーブ・チェン・ジョード・カリムの3人がPayPal社員時代に創業。カリムが「象の鼻」動画を最初に投稿した。創業1年半でGoogleが16.5億ドルで買収。現在は毎分500時間分の動画がアップロードされ、月間利用者数は25億人を超える。',impact:98,status:'DOMINANT'},
+{year:2005,era:'WEB_EXPANSION',cat:'service',name:'Google Maps — 地図がリアルタイムに',desc:'地図が紙から動的なデジタルへ変わった。',detail:'ラース・ラスムッセンらが創業したWhere 2 TechnologiesをGoogleが買収。Keyholeなど複数技術を統合し、2007年のStreet View追加が衝撃的だった。世界中の道路を車で撮影するプロジェクトが始まり、カーナビ業界・旅行業界・不動産業界の地図ビジネスを静かに解体した。',impact:90,status:'DOMINANT'},
+{year:2005,era:'WEB_EXPANSION',cat:'japan',name:'NoMore映画泥棒 — 著作権の反撃',desc:'コンテンツ産業がデジタル流通への法的対応を本格化した。',detail:'日本映画製作者連盟などが開始したキャンペーン。「映画泥棒」のCMは映画館の定番として定着。Winny・WinMXによる著作物の大量流通が社会問題化した時期と重なり、デジタル著作権管理（DRM）と合法配信の整備が加速した。',impact:62},
+{year:2005,era:'WEB_EXPANSION',cat:'japan',name:'GyaO — 無料動画配信の先駆け',desc:'広告モデルによる無料動画配信が日本で始まった。',detail:'USENの宇野康秀が開始。YouTubeより先に「PCで映像コンテンツを無料で見る」文化を日本に根付かせた。会員数は最盛期で1000万人超。後にヤフーへ売却されGyaO!となったが、NetflixやAmazon Primeの台頭で2023年に完全サービス終了。',impact:68,status:'DEAD'},
+{year:2005,era:'WEB_EXPANSION',cat:'japan',name:'ライブドア vs フジテレビ — メディアとネットの衝突',desc:'インターネット企業がテレビ局支配を試みた最初の事件になった。',detail:'堀江貴文がニッポン放送株の約35%をTOBで取得し、フジテレビへの影響力を狙った。「インターネットはすべてのメディアを飲み込む」と宣言。最終的に失敗し翌年のライブドアショック（証券取引法違反）で逮捕。「インターネット vs マスメディア」という構図を日本に突きつけた事件として記憶される。',impact:72},
+{year:2006,era:'WEB_EXPANSION',cat:'service',name:'Twitter — リアルタイム社会の到来',desc:'情報が瞬間的に拡散される構造が生まれた。',detail:'ジャック・ドーシーが「今何してる？」という問いから発想。社内ハッカソンで生まれたプロトタイプが起点。ハッシュタグはユーザーのクリス・メッシーナが提案した。2011年の東日本大震災でのリアルタイム情報拡散で日本でも普及が加速。2022年にイーロン・マスクが440億ドルで買収しXに改名した。',impact:95,status:'DOMINANT'},
+{year:2006,era:'WEB_EXPANSION',cat:'infra',name:'AWS — クラウド化の始まり',desc:'インフラが所有から利用へ変わった。',detail:'ジェフ・ベゾスがAmazon内部のITインフラを外部向けに開放するアイデアを承認。S3（ストレージ）とEC2（サーバー）を2006年にリリース。「サーバーを持たずに世界規模のサービスを作れる」というモデルが定着し、Netflix・Airbnb・Uberはすべてその上で育った。現在のクラウド市場シェアは約33%でトップ。',impact:100,status:'DOMINANT'},
+{year:2006,era:'WEB_EXPANSION',cat:'japan',name:'ニコニコ動画 — コメントが映像に重なる',desc:'動画視聴が個人体験から集合体験へ変わった。',detail:'ドワンゴの西村博之（ひろゆき）らが開発。「弾幕」と呼ばれるコメントが映像上を流れるUIは世界に類を見ない発明だった。「ゆっくり」文化・歌ってみた・踊ってみたなど独自ジャンルを生み出し、中国のBiliBiliはこのUIを直接参考にした。ピーク時の会員数は3000万人超。',impact:80,status:'LEGACY'},
+
+/* ── PLATFORM（2007–2015） ── */
+
+{year:2007,era:'PLATFORM',cat:'hardware',name:'iPhone — インターネットがポケットに入る',desc:'インターネットが常時携帯される存在になった。',detail:'2007年1月9日、スティーブ・ジョブズが「今日、われわれは電話を再発明する」と発表。ノキア・ブラックベリーの幹部は「キーボードなしのスマホが売れるわけない」と笑った。発売初日に購入者が全米の店舗で行列を作り、「アップルの奇跡」と報道された。現在iPhoneシリーズの累計販売台数は25億台を超える。',impact:100,status:'DOMINANT'},
+{year:2007,era:'PLATFORM',cat:'service',name:'Kindle — 書籍がデジタル化',desc:'本を持ち歩く行為が、紙からデータへ変わった。',detail:'アマゾンが発売初日に完売し、5時間半で在庫が尽きた。初代Kindleは349ドルで電子ペーパーを採用。出版社の価格設定権を奪い、電子書籍を9.99ドル均一で販売するモデルで出版業界と対立した。現在は電子書籍市場のシェア約65%を占める。',impact:80,status:'DOMINANT'},
+{year:2008,era:'PLATFORM',cat:'hardware',name:'Android — スマホの民主化',desc:'スマートフォンが一部から世界へ広がった。',detail:'グーグルが2005年に買収したAndroid Incの技術を基に、HTC Dreamとして初リリース。オープンソース戦略でサムスン・LG・ソニーなど多数のメーカーが参入し、iPhoneの対抗軸を形成した。現在のモバイルOSシェアはAndroid約72%・iOS約27%。iPhoneが「高級品」なら、Androidが「インターネットを世界中に届けた」存在。',impact:95,status:'DOMINANT'},
+{year:2008,era:'PLATFORM',cat:'infra',name:'Chrome — ブラウザ戦争の再燃',desc:'高速なJavaScriptエンジンがウェブアプリの可能性を広げた。',detail:'Googleが独自のV8エンジンを搭載して公開。IEのシェアが95%あった市場に殴り込み、10年で逆転した。V8はNode.jsの基盤にもなり、サーバーサイドJavaScriptという新文化を生み出した。現在のブラウザシェアはChromeが約65%でトップ。',impact:88,status:'DOMINANT'},
+{year:2008,era:'PLATFORM',cat:'service',name:'Airbnb — 空間のシェアが始まる',desc:'個人が所有する空間が他者へ提供できる構造が成立した。',detail:'ブライアン・チェスキーとジョー・ゲビアが家賃が払えず自室にエアマットを置いて他人を泊めたのが起源。「Air Bed and Breakfast」が略されAirbnb。当初YCombinatorに断られ、大統領選のシリアル（「Obama O\'s」）を販売して資金を集めた逸話が有名。現在は190カ国800万件以上のリスティングを持つ。',impact:85,status:'DOMINANT'},
+{year:2009,era:'PLATFORM',cat:'infra',name:'Bitcoin — 非中央集権通貨の誕生',desc:'国家や銀行を介さない価値交換の仕組みが生まれた。',detail:'「サトシ・ナカモト」という正体不明の人物（または集団）が論文を発表。リーマンショック直後の「銀行は信用できない」という空気の中で生まれた。2009年1月3日に最初のブロックが採掘（マイニング）され、ブロックに「Chancellor on brink of second bailout for banks」という新聞見出しが刻まれた。',impact:88,status:'DOMINANT'},
+{year:2009,era:'PLATFORM',cat:'japan',name:'アメーバピグ — 仮想空間の大衆化',desc:'アバターで仮想空間を移動する体験が一般ユーザーへ広がった。',detail:'サイバーエージェントが運営。Second Lifeより軽くて可愛いデザインが女性・10代に受け、ピーク時は会員数2000万人超を達成。アイテム課金で月商数億円を記録した時期もあった。スマートフォンシフトに乗れず2019年にサービス終了。「かわいい仮想空間の全盛と終焉」を象徴する存在。',impact:70,status:'DEAD'},
+{year:2010,era:'PLATFORM',cat:'hardware',name:'iPad — タブレットが定着',desc:'PCとスマートフォンの中間デバイスが新たな用途を生んだ。',detail:'スティーブ・ジョブズが「ノートPCとスマートフォンの間に何かあるべきか？」という問いから製品化。発売初日に30万台を販売し、28日で100万台を突破。教育・医療・航空（パイロットのマニュアル電子化）など、キーボード不要の業務が一気にデジタル化した。',impact:85,status:'DOMINANT'},
+{year:2010,era:'PLATFORM',cat:'service',name:'Instagram — 写真がコミュニケーションになる',desc:'画像が言語に代わる表現手段として成立した。',detail:'ケビン・シストロムとマイク・クリーガーが8人でスタートし、リリース初日に2.5万ダウンロードを記録。2012年にFacebook（マーク・ザッカーバーグ）が10億ドルで買収。当時「高すぎる」と批判された買収価格は、現在の換算では「格安」とされる。インフルエンサー文化・「映える」消費行動を社会に定着させた。',impact:90,status:'DOMINANT'},
+{year:2010,era:'PLATFORM',cat:'infra',name:'4G LTE — 動画がモバイルに流れる',desc:'スマートフォンで動画ストリーミングが現実的になった。',detail:'スウェーデンのTeliaSoneraが世界初の商用サービスを開始。日本ではNTTドコモ・KDDI・ソフトバンクが2012年に展開。LTE普及によりモバイル動画視聴が急増し、テレビの「ながら視聴」がスマホに奪われた。Netflixが日本でサービス開始したのも4G普及後の2015年。',impact:90,status:'DOMINANT'},
+{year:2011,era:'PLATFORM',cat:'japan',name:'LINE — メッセージがインフラ化',desc:'コミュニケーションがアプリに集約された。',detail:'2011年3月11日の東日本大震災で電話回線が麻痺したことを受け、NHN Japan（現LINEヤフー）が同年6月にリリース。スタンプという「感情を絵で送る」文化を生み出し、リリース1年半で5000万ユーザーを突破。現在の国内MAUは約9500万人。「既読スルー」という言葉を日本語に定着させた。',impact:95,status:'DOMINANT'},
+{year:2011,era:'PLATFORM',cat:'hardware',name:'Siri — 音声がインターフェースになる',desc:'機械への命令が文字入力から音声へ移行し始めた。',detail:'スティーブ・ジョブズ最後のプレゼンで発表されたiPhone 4Sの目玉機能。Siriは元々独立したアプリで、Appleが買収した。「Hey Siri」という呼びかけがスタンダードになり、後のAlexa（2014）・Google Assistant（2016）を引き出した。音声UIという新しい人機インターフェースのカテゴリを開いた。',impact:80,status:'DOMINANT'},
+{year:2012,era:'PLATFORM',cat:'service',name:'Spotify — 音楽の所有が終わる',desc:'音楽をCDや購入ファイルで持つ時代が終わった。',detail:'スウェーデンのダニエル・エクが2006年に創業し2008年に欧州でサービス開始。「海賊版と戦うには、海賊版より便利なサービスを作るしかない」が創業の哲学。日本には2016年に上陸。現在は230カ国6億ユーザー以上。月額制の「アクセス権」モデルが音楽産業の収益構造を根本から変えた。',impact:88,status:'DOMINANT'},
+{year:2013,era:'PLATFORM',cat:'service',name:'Netflix — 配信が制作を支配',desc:'コンテンツ制作の主導権が配信側に移った。',detail:'「ハウス・オブ・カーズ」（2013年）でオリジナルコンテンツ制作に参入。視聴データを分析して「デヴィッド・フィンチャー監督×ケビン・スペイシー主演の政治ドラマ」という組み合わせを導き出したことが話題に。現在は190カ国以上で2億7000万人が加入。テレビ局・映画会社の在り方を根本から変えた。',impact:90,status:'DOMINANT'},
+{year:2013,era:'PLATFORM',cat:'infra',name:'Snowden — 監視の実態が露わになる',desc:'インターネットが自由な空間ではないという現実が示された。',detail:'NSA職員エドワード・スノーデンが英ガーディアン紙にPRISM（GAFAM経由の大規模監視プログラム）の存在を暴露。「インターネットを使うことは監視されること」という現実が白日の下に。HTTPS普及の加速、GDPR（EU一般データ保護規則）制定（2018年）、VPN需要の爆増へとつながった。',impact:85,status:'LEGACY'},
+{year:2014,era:'PLATFORM',cat:'hardware',name:'Echo / Alexa — 会話がデバイスに宿る',desc:'家の中に常時応答するAIが置かれる時代が始まった。',detail:'アマゾンが突然発表したスマートスピーカー。「常に聴いているデバイス」というプライバシーへの挑戦でもあった。発売時は「なぜAmazonが音楽スピーカーを？」と戸惑いがあったが、ショッピング・天気・タイマーなど生活に溶け込んだ。Google Home（2016）・Apple HomePod（2018）を引き出し、スマートホーム市場を創造した。',impact:82,status:'DOMINANT'},
+{year:2015,era:'PLATFORM',cat:'hardware',name:'Apple Watch — 身体がデバイスになる',desc:'コンピュータが手首に装着される存在へ変わった。',detail:'スティーブ・ジョブズ亡き後初の主力新製品として発表。当初「ファッション品か機能品か」で議論が分かれたが、心電図計測（Series 4, 2018年）・血中酸素計測（Series 6, 2020年）で医療デバイスとしての地位を確立。心臓の不整脈を発見したユーザーの体験談が多数報告されている。',impact:80,status:'DOMINANT'},
+{year:2015,era:'PLATFORM',cat:'service',name:'Slack — 仕事の会話が変わる',desc:'ビジネスコミュニケーションがメールからリアルタイムチャットへ移行した。',detail:'スチュワート・バターフィールドがゲーム会社の社内ツールとして開発。SaaSとして最速でユニコーン（評価額10億ドル超）になった記録を樹立。2020年のコロナ禍でDAUが1日で50%増加。2021年にセールスフォースが277億ドルで買収。MicrosoftのTeamsとのシェア争いは現在も続く。',impact:85,status:'DOMINANT'},
+
+/* ── AI_ERA（2016–2026） ── */
+
+{year:2016,era:'AI_ERA',cat:'service',name:'TikTok — アルゴリズムが支配',desc:'コンテンツ発見がフォローから推薦へ変わった。',detail:'張一鳴（バイトダンス）が2016年に中国版「Douyin」をリリース。2018年にMusical.lyを10億ドルで買収しTikTokとして国際展開。「フォローしていない人の動画が流れてくる」レコメンドアルゴリズムが革命的で、既存SNSがフォロー関係を軸にしていた常識を覆した。リリース後3年で月間アクティブユーザー10億人突破。',impact:95,status:'DOMINANT'},
+{year:2016,era:'AI_ERA',cat:'service',name:'AlphaGo — AIの転換点',desc:'AIが人間を超える可能性が現実として認識された。',detail:'DeepMindのデミス・ハサビスが率いるチームが開発。囲碁世界チャンピオンの李世乭（イ・セドル）と5番勝負を行い4勝1敗。李世乭は「機械に感情があるように感じた」と語り、唯一勝てた第4局の手を「神の一手」と呼んだ。この一戦がAIへの研究投資を世界規模で加速させた。',impact:98,status:'DOMINANT'},
+{year:2017,era:'AI_ERA',cat:'infra',name:'Transformer — 現代AIの設計図が生まれる',desc:'大規模言語モデルの基盤となるアーキテクチャが確立した。',detail:'Googleの研究者8名が「Attention Is All You Need」を発表。著者の一人アシシュ・ヴァスワニらは後に独立しAI企業を創業した。この論文なしにGPT・BERT・Claude・Geminiは存在しない。「Attention機構」により長い文章の文脈を保持できるようになり、自然言語処理が飛躍した。',impact:100,status:'DOMINANT'},
+{year:2019,era:'AI_ERA',cat:'infra',name:'5G — 通信の次元が変わる',desc:'超高速・超低遅延の通信インフラが整い始めた。',detail:'韓国のSKテレコムとKTが2019年4月に世界初の商用サービスを開始。理論値20Gbpsという4Gの20倍の速度を実現。日本ではNTTドコモ・KDDI・ソフトバンク・楽天が2020年にスタート。自動運転・遠隔手術・産業IoTなど低遅延が必要な用途の技術的前提が整った。',impact:85,status:'DOMINANT'},
+{year:2020,era:'AI_ERA',cat:'service',name:'COVID-19 — デジタルシフトが強制的に加速',desc:'10年分の変化が1〜2年で起きた。',detail:'2020年3月のWHOパンデミック宣言後、Zoomの1日あたりのミーティング参加者数が1000万人から3億人に急増。EC売上が1年で5年分成長し、フードデリバリーが激増した。一方でデジタルに乗れない層との格差が顕在化。リモートワーク文化の定着が、働き方と都市の在り方を根本から変えた。',impact:95,status:'DOMINANT'},
+{year:2020,era:'AI_ERA',cat:'hardware',name:'Apple M1 — 半導体の設計が変わる',desc:'CPUアーキテクチャの転換により、性能と省電力の常識が更新された。',detail:'Appleが自社設計のARMチップM1を発表。x86（Intel）から移行し、性能は従来比最大3.5倍・電力消費は半分以下という衝撃的なスペックを叩き出した。「Macがここまで速くなるとは」という市場の驚きが開発者コミュニティを席巻。後のM2・M3・M4シリーズへと続く半導体内製化の起点となった。',impact:88,status:'DOMINANT'},
+{year:2022,era:'AI_ERA',cat:'infra',name:'Starlink × ウクライナ — 通信のボーダレス化',desc:'地上インフラが破壊されても衛星で通信が維持できる時代になった。',detail:'2022年2月のロシア侵攻直後、ウクライナのフョードロフ副首相がイーロン・マスクにTwitterでスターリンクを要請。マスクは10時間で承認し数日以内に提供した。ミサイル攻撃で地上通信が破壊された地域でも通信が維持され、「インターネットは地上インフラに依存する」という常識が崩れた歴史的転換点。',impact:88,status:'DOMINANT'},
+{year:2022,era:'AI_ERA',cat:'service',name:'ChatGPT — AIが対話する存在に',desc:'AIが人間の思考を補助する存在になった。',detail:'サム・アルトマン率いるOpenAIが2022年11月30日にリリース。公開5日で100万ユーザー、2ヶ月で1億ユーザーを突破（Netflix が1億ユーザーに達するまで3年半かかった）。「AIと普通に会話できる」という体験が世界に衝撃を与え、Google・Meta・Anthropicなど全テック企業の戦略を強制的に書き換えた。',impact:100,status:'DOMINANT'},
+{year:2022,era:'AI_ERA',cat:'service',name:'Stable Diffusion / DALL-E — 画像生成の民主化',desc:'プロでなくても高品質な画像を生成できる時代が始まった。',detail:'OpenAIのDALL-E 2（2022年4月）、Midjourneyのベータ版（2022年3月）、Stability AIのStable Diffusion（2022年8月）がほぼ同時期に登場。イラストレーター・デザイナー・写真家の仕事が根本から問い直された。「AIが生成した絵がコンテストで優勝」という事件が著作権・アートの定義論争を引き起こした。',impact:90,status:'DOMINANT'},
+{year:2023,era:'AI_ERA',cat:'infra',name:'Nvidia — GPUがAIのインフラになる',desc:'半導体がAI覇権の中核資源として位置づけられた。',detail:'ジェンスン・フアン（黄仁勲）が率いるNvidiaのH100チップがAI学習の標準インフラに。2023年5月に時価総額1兆ドルを突破し、2024年には一時アップルを抜いて世界1位に。「GPUが足りない」という供給不足が全AI企業の最大のボトルネックとなり、半導体がAI覇権の「石油」として認識された。',impact:92,status:'DOMINANT'},
+{year:2023,era:'AI_ERA',cat:'service',name:'GPT-4 / Claude / Gemini — LLM競争が始まる',desc:'AIの能力が実用レベルに達し、産業への浸透が始まった。',detail:'GPT-4（OpenAI、2023年3月）・Claude（Anthropic）・Gemini（Google）が相次いでリリース。司法試験・医師国家試験・MBAの試験で上位合格レベルの成績を出し「AIが専門家を超える」時代の到来が現実化した。コーディング支援（GitHub Copilot等）が普及し、プログラマーの生産性が劇的に向上した。',impact:98,status:'DOMINANT'},
+{year:2024,era:'AI_ERA',cat:'service',name:'Sora — 動画生成AIが現れ、消える',desc:'テキストから動画を生成する技術が登場したが、コストの壁に阻まれた。',detail:'OpenAIが2024年2月に発表し世界を驚かせたが、2026年3月に突然終了を発表。1日100万ドル（約1.5億円）の運用コストとIPO前の「選択と集中」が理由とされた。Disney（マーベル・ピクサー）との1,600億円規模の提携も、終了発表の30分前まで実務チームがミーティングをしていたにもかかわらず破談に。「夢の技術がコストの現実に敗れた」事例として記憶される。',impact:78,status:'DEAD'},
+{year:2024,era:'AI_ERA',cat:'hardware',name:'AI PC — AIが端末に宿る',desc:'クラウドではなくデバイス内でAI処理が行われる時代が始まった。',detail:'MicrosoftがQualcomm・Intel・AMDのNPU（AI専用プロセッサ）搭載PCを「Copilot+ PC」として発表。ユーザーの過去の操作を記憶して検索できる「Recall」機能がプライバシー論争を招き一時延期された。クラウドに送らずローカルで処理することで、低遅延・オフライン動作・プライバシー保護が可能になった。',impact:80,status:'DOMINANT'},
+{year:2026,era:'AI_ERA',cat:'service',name:'AIエージェント — AIが実行主体になる',desc:'AIが指示を受けて作業を完遂する存在へ変わった。',detail:'OpenAI・Anthropic・Googleが相次いで「Computer Use」「Operator」「Project Astra」などのエージェント機能を投入。ブラウザを操作し、メールを送り、コードを書いてテストし、スプレッドシートを更新するといった複数ステップの業務をAIが自律完遂する時代が始まった。2026年末には企業アプリの40%にAIエージェントが組み込まれると予測される。',impact:98,status:'DOMINANT'},
+{year:2026,era:'AI_ERA',cat:'service',name:'AI覇権戦争 — DeepSeekの台頭',desc:'アメリカ一強だったAI開発に中国が割り込んだ。',detail:'中国のDeepSeekがGPT-4水準のモデルをオープンソースかつ超低コストで公開し、米テック株が1日で数千億ドル暴落した（Nvidiaだけで時価総額17兆円消失）。2026年4月はAnthropicが「強すぎて公開できない」と判断し一般公開を見送ったモデルが登場するなど「AI史上最も競争が激しい月」とも言われた。',impact:95,status:'DOMINANT'},
+
+/* ── 復元・追加イベント ── */
+
+{year:1994,era:'FOUNDATION',cat:'japan',name:'QRコード — 現実とデジタルを繋ぐ',desc:'現実世界の情報が瞬時にデジタル化された。',detail:'デンソーの原昌宏が工場の部品管理効率化のために開発。バーコードの20倍の情報量を持ち、どの角度からでも読み取れる設計が革命的だった。特許をあえて無償公開したことで世界標準に。コロナ禍でメニューのQRコード化が加速し、決済・認証・マーケティングの基盤として世界中に定着した。',impact:90,status:'DOMINANT'},
+
+{year:2018,era:'AI_ERA',cat:'service',name:'ケンブリッジ・アナリティカ — SNSと民主主義の衝突',desc:'SNSの個人データが選挙操作に使われた実態が明らかになった。',detail:'英国のデータ分析会社がFacebookの8700万人分の個人データを無断取得し、2016年米大統領選でトランプ陣営のターゲティング広告に活用したことが発覚。マーク・ザッカーバーグが米上院公聴会に召喚された。「SNSのアルゴリズムは民主主義を操作できる」という現実を世界に突きつけた。',impact:88,status:'LEGACY'},
+
+{year:2018,era:'AI_ERA',cat:'japan',name:'PayPay — 決済がスマホに統合される',desc:'現金中心の決済がスマートフォンへ移行した。',detail:'ソフトバンクとヤフーが設立。2018年12月の「100億円あげちゃうキャンペーン」が話題を呼び、わずか10日間で100億円の還元枠が消化された。中国のAlipayのシステムをベースに開発。加盟店数が360万カ所を超え、日本のキャッシュレス決済比率を10年分一気に引き上げた。',impact:82,status:'DOMINANT'},
+
+{year:2021,era:'AI_ERA',cat:'service',name:'Facebook → Meta — メタバース宣言',desc:'世界最大のSNS企業が「次の時代」へ社名ごと賭けに出た。',detail:'マーク・ザッカーバーグが2021年10月に社名をMetaに変更し、メタバースへの全面移行を宣言。VRデバイス・仮想空間・アバターに数兆円を投資したが、株価は翌年に75%暴落。Second Lifeと同じ壁に当たったとも評された。しかしInstagram・WhatsApp・Facebookの3大プラットフォームは依然として圧倒的な影響力を持つ。',impact:82,status:'DOMINANT'},
+
+{year:2021,era:'AI_ERA',cat:'service',name:'NFTバブル — デジタル所有権の実験',desc:'デジタルデータに「唯一性」という概念が生まれた。',detail:'Beepleのデジタルアートが約75億円で落札され世界を驚かせた。ブロックチェーンで所有権を証明するNFTは、アート・ゲーム・スポーツカードなどに波及。しかし2022年に市場は99%以上崩壊した。「デジタルコンテンツを所有するとはどういうことか」という問いは今も続いている。',impact:75,status:'DEAD'},
+
+{year:2021,era:'AI_ERA',cat:'service',name:'Clubhouse — 音声SNSが一瞬輝く',desc:'招待制の音声SNSが世界中で熱狂を生み、半年で消えた。',detail:'アンドリュー・ブラックとポール・デイヴィソンが開発。招待制という希少性と「リアルタイム音声」という体験が新鮮で、イーロン・マスクや孫正義も登壇。日本でも芸能人・経営者が続々と参加し社会現象に。しかしTwitterのSpaces・InstagramのLIVE等に機能を模倣され、1年も経たずに熱が冷めた。「招待制のバズ」の教科書的事例。',impact:70,status:'DEAD'},
+
+{year:2025,era:'AI_ERA',cat:'infra',name:'EU AI Act — 世界初のAI規制法が動く',desc:'AIに対する法的規制の枠組みが初めて実施段階へ移った。',detail:'2024年に欧州議会が採択し、2025年から段階的に施行。リスクレベルに応じてAIを4段階に分類し、高リスクAIには厳格な透明性・説明責任を求める。顔認識・採用判断・信用スコアリングへの規制が特に注目された。「誰がAIを規制するのか」という問いに初めて法律が答えを出した。',impact:85},
+{year:2025,era:'AI_ERA',cat:'service',name:'OpenAI IPO準備 — AI企業が資本市場へ',desc:'非営利から始まったAI企業が、史上最大規模のIPOを目指す存在へ変わった。',detail:'サム・アルトマン率いるOpenAIが2025年末〜2026年のIPOを目指して準備を本格化。年間売上が250億ドルに迫り、評価額は3000億ドルを超えた。「人類のためのAI」という当初の非営利ミッションと、株主への収益最大化というIPOの矛盾をどう解決するかが問われた。',impact:80},
+{year:2025,era:'AI_ERA',cat:'infra',name:'Vibe Coding — AIがコードを書く時代へ',desc:'プログラミングの主体がAIへと移行し始めた。',detail:'Andrej Karpathy（元Tesla AI責任者）が2025年2月に「Vibe Coding」という概念を提唱。「コードを読まず、雰囲気（vibe）だけでAIに書かせる」スタイルが開発者に広まった。GitHub CopilotやCursorの普及とともに、「コードが書けること」より「AIに正確に指示できること」が新しいスキルとして台頭した。',impact:85},
+
+/* ── 新規追加イベント ── */
+{year:2002,era:'WEB_EXPANSION',cat:'hardware',name:'iRobot Roomba — 家電が自律的に動き出す',desc:'掃除という家事が、初めて自律的な機械に委ねられた。',detail:'iRobotのコリン・アングルらが開発。「ロボットは工場のもの」という常識を家庭に持ち込んだ最初の製品。後のスマート家電・IoT化への「最初の一歩」として位置づけられる。現在は地図生成・Wi-Fi連携・AIによる障害物認識まで進化した。',impact:78,status:'DOMINANT'},
+{year:2013,era:'PLATFORM',cat:'hardware',name:'DJI Phantom — 空がインターネットに繋がる',desc:'空撮が一部のプロから一般市民へ開放された。',detail:'中国・深圳のフランク・ワン（汪滔）が設立したDJIが民生用ドローンを大衆化。農業・測量・映像制作・災害対応まで用途が拡大した。日本では2022年に改正航空法でドローン規制が本格化し、「空にもルールが必要な時代」が到来した。',impact:80,status:'DOMINANT'},
+{year:2015,era:'PLATFORM',cat:'hardware',name:'Tesla Autopilot — 車がソフトウェアになる',desc:'自動車がアップデートで進化するプロダクトへ変わった。',detail:'イーロン・マスク率いるTeslaが自動運転支援システムを実装。「車を買ったら終わり」だった常識が、「買った後も改善される」へ変わった。同時期にAndroid Auto・Apple CarPlay（ともに2014年）の普及でスマホが車の頭脳になり、音楽・地図・通話すべてがスマホ経由になった。数十万円のカーナビ専用機の存在意義が失われ、「地図は持ち歩くものではなく降ってくるもの」になった。',impact:85,status:'DOMINANT'},
+{year:2016,era:'AI_ERA',cat:'service',name:'フェイクニュース — テキストの嘘が選挙を動かす',desc:'インターネットが「正しい情報を届けるインフラ」ではなくなった。',detail:'2016年米大統領選でFacebook上の偽記事・デマ投稿が選挙に影響したとされ、オックスフォード辞典の「今年の言葉」にPost-truthが選ばれた。「クリックされる嘘はクリックされない真実に勝つ」という構造がSNSのアルゴリズムによって加速した。コロナ禍ではデマが感染症と並走する「インフォデミック」という言葉が生まれた。',impact:85,status:'LEGACY'},
+{year:2018,era:'AI_ERA',cat:'service',name:'ディープフェイク — 映像の真実が崩壊する',desc:'顔を差し替えた偽動画が、現実と虚構の境界を消し始めた。',detail:'AIによる顔合成技術がオープンソースで公開され、政治家・芸能人の偽動画が大量生成されるようになった。「自分の目で見たものが証拠」という人類の根本的な認識が揺らいだ。2024年以降はリアルタイム生成が可能になり、ビデオ通話でも本人かどうか判断できない時代に入った。フェイクニュース（文字）とは異なる、映像を使った新たな情報操作の時代が始まった。',impact:88,status:'LEGACY'},
+
+];
+
+/* ── State ── */
+const activeCats={service:true,hardware:true,infra:true,japan:true};
+let searchTerm='';
+
+function toggleCat(cat){
+  activeCats[cat]=!activeCats[cat];
+  const el=document.querySelector(`[data-cat="${cat}"]`);
+  el.classList.toggle('active',activeCats[cat]);
+  el.classList.toggle('inactive',!activeCats[cat]);
+  renderAll();
+}
+
+function doSearch(){
+  searchTerm=document.getElementById('searchInput').value.toLowerCase();
+  renderAll();
+}
+
+function isVisible(ev){
+  if(!activeCats[ev.cat])return false;
+  if(!searchTerm)return true;
+  return(ev.name+ev.desc+ev.detail+String(ev.year)).toLowerCase().includes(searchTerm);
+}
+
+function toggleOpen(card){card.classList.toggle('open');}
+
+function renderAll(){
+  const wrap=document.getElementById('timelineWrap');
+  const stats=document.getElementById('statsBar');
+  const noRes=document.getElementById('noResults');
+  wrap.innerHTML='';
+  wrap.appendChild(stats);
+  wrap.appendChild(noRes);
+
+  const years=[...new Set(DATA.map(d=>d.year))].sort((a,b)=>a-b);
+  let totalVisible=0;
+  let lastYear=null;
+
+  const catNames={service:'Service',hardware:'Hardware',infra:'Infra / Tech',japan:'Japan'};
+
+  years.forEach(year=>{
+    const events=DATA.filter(d=>d.year===year&&isVisible(d));
+    const allEventsThisYear=DATA.filter(d=>d.year===year);
+    if(allEventsThisYear.length===0)return;
+
+    /* era-label: 年が変わるときだけ表示 */
+    const eraKey=allEventsThisYear[0].era;
+    const showEra=(year!==lastYear);
+    lastYear=year;
+
+    const group=document.createElement('div');
+    group.className='year-group'+(events.length>0?' has-events':'');
+
+    /* year-label-col */
+    const yearCol=document.createElement('div');
+    yearCol.className='year-label-col';
+
+    if(showEra&&eraKey){
+      const eraEl=document.createElement('div');
+      eraEl.className='era-label';
+      eraEl.textContent=eraKey.replace('_',' ');
+      yearCol.appendChild(eraEl);
+    }
+
+    const yearLabel=document.createElement('div');
+    yearLabel.className='year-label';
+    yearLabel.textContent=year;
+    yearCol.appendChild(yearLabel);
+
+    /* spine */
+    const spineCol=document.createElement('div');
+    spineCol.className='spine-col';
+    const spineDot=document.createElement('div');
+    spineDot.className='spine-dot';
+    const spineLine=document.createElement('div');
+    spineLine.className='spine-line';
+    spineCol.appendChild(spineDot);
+    spineCol.appendChild(spineLine);
+
+    /* events */
+    const eventsCol=document.createElement('div');
+    eventsCol.className='events-col';
+
+    if(events.length===0){
+      const ph=document.createElement('div');
+      ph.style.cssText='height:20px;';
+      eventsCol.appendChild(ph);
+    }
+
+    events.forEach((ev,i)=>{
+      totalVisible++;
+      const card=document.createElement('div');
+      card.className=`event-card cat-${ev.cat}`;
+      card.style.animationDelay=`${i*0.04}s`;
+      const defunctBadge=ev.defunct?'<span class="defunct-badge">Defunct</span>':'';
+      const statusBadge=ev.status?`<span class="status-badge status-${ev.status}">${ev.status}</span>`:'';
+      card.innerHTML=`
+        <div class="event-header">
+          <span class="event-tag">${catNames[ev.cat]}</span>
+          <span class="event-name">${ev.name}</span>
+          ${statusBadge}
+          ${defunctBadge}
+        </div>
+        <div class="event-desc">${ev.desc}</div>
+        <div class="event-detail">
+          <p>${ev.detail}</p>
+          <div class="impact-bar">
+            <span class="impact-label">IMPACT</span>
+            <div class="impact-track"><div class="impact-fill" style="width:${ev.impact}%"></div></div>
+          </div>
+        </div>`;
+      card.onclick=()=>toggleOpen(card);
+      eventsCol.appendChild(card);
+    });
+
+    group.appendChild(yearCol);
+    group.appendChild(spineCol);
+    group.appendChild(eventsCol);
+    wrap.appendChild(group);
+  });
+
+  document.getElementById('countDisplay').textContent=totalVisible;
+  document.getElementById('totalCount').textContent=DATA.length;
+  document.getElementById('noResults').style.display=totalVisible===0?'block':'none';
+}
+
+function handleSubmit(e){
+  e.preventDefault();
+  const form=e.target;
+  const success=document.getElementById('formSuccess');
+  form.querySelectorAll('input,textarea,select,button').forEach(el=>el.disabled=true);
+  success.style.display='block';
+  setTimeout(()=>{
+    form.reset();
+    form.querySelectorAll('input,textarea,select,button').forEach(el=>el.disabled=false);
+    success.style.display='none';
+  },4000);
+}
+
+renderAll();
+</script>
+</body>
+</html>
