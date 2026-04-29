@@ -69,11 +69,13 @@
   /* era-label: 気づく人だけ気づくレベル */
   .era-label{
     font-family:'IBM Plex Mono',monospace;
-    font-size:0.48rem;
-    color:#2a3a5a;
-    letter-spacing:0.22em;
+    font-size:0.6rem;
+    font-weight:500;
+    color:rgba(184,199,230,0.55);
+    letter-spacing:0.08em;
     text-transform:uppercase;
     margin-bottom:4px;
+    margin-right:6px;
     opacity:0.5;
     line-height:1;
     text-align:right;
@@ -125,7 +127,8 @@
   /* detail: 人間の体験・具体 */
   .event-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
   .event-detail p{font-size:0.74rem;color:#8a9ab8;line-height:1.8;}
-  .event-card.open .event-detail{display:block;}
+  .event-card.open 
+  .event-detail{display:block;}
 
   .impact-bar{display:flex;align-items:center;gap:8px;margin-top:12px;}
   .impact-label{font-family:'IBM Plex Mono',monospace;font-size:0.56rem;color:var(--text-dim);width:52px;letter-spacing:0.06em;}
